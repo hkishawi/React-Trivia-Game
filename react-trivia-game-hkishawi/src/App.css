@@ -4,8 +4,8 @@
 
 .header {
   text: center;
-  position: fixed;
-  left: 35%;
+  position: relative;
+  left: 0%;
   text-align: center;
 }
 

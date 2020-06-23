@@ -3,25 +3,27 @@ import './App.css'
 import Header from './components/Header'
 import CategoryList from './components/Question'
 import axios from 'axios'
- 
+import CategoryData from './components/CategoryData'
+
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     console.log('constuctor')
     this.state = {
-      categories: []
+      categories: [],
+      currentCategory: null
     }
   }
 
   componentDidMount () {
     console.log('componentDidMount')
     axios
-      .get(`https://opentdb.com/api_category.php`)
+      .get('https://opentdb.com/api_category.php')
       .then(response => {
-        console.log(response)
+        console.log(response.data)
         this.setState({
-          categories: response.data
+          categories: response.data.trivia_categories
         })
       })
   }
@@ -35,19 +37,28 @@ class App extends React.Component {
   }
 
   render () {
-
     console.log('render')
-    return (
+    const { categories, currentCategory } = this.state
 
+    return (
       <div className='App'>
-        <Header />
-        <h3>List of categories</h3>
-        {/* <ul>
-          {this.state.categories.map(category => 
-            <li key={category.id}>{category.name}</li>
-          )}
-        </ul> */}
-        <CategoryList />
+        {
+          currentCategory 
+          ? <CategoryData category={currentCategory} />
+          : (
+          <div>
+            <Header />
+            <h3>List of categories</h3>
+            <ul>
+              {this.state.categories.map(category =>
+                <li key={category.id}>
+                  <a href='#' onClick={() => this.setCategory(category)}>{category.name}</a>
+                </li>
+              )}
+            </ul>
+          </div>
+          )
+        }
       </div>
     )
   }
