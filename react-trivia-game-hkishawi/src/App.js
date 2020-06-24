@@ -5,6 +5,20 @@ import CategoryList from './components/Question'
 import axios from 'axios'
 import CategoryData from './components/CategoryData'
 
+// Header () {
+//   render () {
+//     return [
+//       <div class="header">
+//         <h1 >Welcome to Trivia!</h1>
+//         <div>
+//         <span><a href='#' onClick={() => this.prop.setCategory(category)}>home | </a></span>
+//         <span> trivia | </span>
+//         <span> about </span>
+//         </div>
+//       </div>
+//     ]
+//   }
+// }
 
 class App extends React.Component {
   constructor (props) {
@@ -19,11 +33,11 @@ class App extends React.Component {
   componentDidMount () {
     console.log('componentDidMount')
     axios
-      .get('https://opentdb.com/api_category.php')
+      .get('https://opentdb.com/api.php?amount=10')
       .then(response => {
         console.log(response.data)
         this.setState({
-          categories: response.data.trivia_categories
+          categories: response.data.results
         })
       })
   }
@@ -32,8 +46,8 @@ class App extends React.Component {
     console.log('componentDidUnmount')
   }
 
-  setCategory (category) {
-    this.setState({ currentCategory: category })
+  setQuestion (category) {
+    this.setState({ currentQuestion: category.question })
   }
 
   render () {
@@ -42,22 +56,22 @@ class App extends React.Component {
 
     return (
       <div className='App'>
+        <Header />
         {
-          currentCategory 
-          ? <CategoryData category={currentCategory} />
-          : (
-          <div>
-            <Header />
-            <h3>List of categories</h3>
-            <ul>
-              {this.state.categories.map(category =>
-                <li key={category.id}>
-                  <a href='#' onClick={() => this.setCategory(category)}>{category.name}</a>
-                </li>
-              )}
-            </ul>
-          </div>
-          )
+          currentCategory
+            ? <CategoryData category={currentCategory} />
+            : (
+              <div>
+                <h3>List of categories</h3>
+                <ul>
+                  {this.state.categories.map(category => (
+                    <li key={category.question}>
+                      <a href='#' onClick={() => this.setQuestion(category)}>{category.category}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
         }
       </div>
     )

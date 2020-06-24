@@ -6,7 +6,7 @@ class Header extends React.Component {
       <div class="header">
         <h1 >Welcome to Trivia!</h1>
         <div>
-        <span>home | </span>
+        <span><a href='http://localhost:3000/' onClick=""> home | </a></span>
         <span> trivia | </span>
         <span> about </span>
         </div>
