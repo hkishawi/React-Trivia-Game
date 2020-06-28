@@ -1,9 +1,12 @@
 import React from 'react'
 import './App.css'
+import './tachyons.css'
 import Header from './components/Header'
-import CategoryList from './components/Question'
+import CategoryList from './components/QuestionData'
 import axios from 'axios'
 import CategoryData from './components/CategoryData'
+import AnswerData from './components/AnswerData'
+import QuestionData from './components/QuestionData'
 
 // Header () {
 //   render () {
@@ -27,17 +30,21 @@ class App extends React.Component {
     this.state = {
       categories: [],
       currentCategory: null
+      // currentQuestion: null,
+      // currentAnswer: null
     }
+
+    this.currentCategory = this.currentCategory.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount () { // this pulls the data we're using
     console.log('componentDidMount')
     axios
-      .get('https://opentdb.com/api.php?amount=10')
+      .get('https://opentdb.com/api_category.php')
       .then(response => {
         console.log(response.data)
         this.setState({
-          categories: response.data.results
+          categories: response.data.trivia_categories
         })
       })
   }
@@ -46,34 +53,63 @@ class App extends React.Component {
     console.log('componentDidUnmount')
   }
 
-  setQuestion (category) {
-    this.setState({ currentQuestion: category.question })
+  // setQuestion (category) { // this will change the state of obj that will be rendered
+  //   this.setState({ currentQuestion: results.question })
+  // }
+
+  currentCategory (category) {
+    this.setState({ currentCategory: category })
   }
+
+  // currentAnswer (category) {
+  //   this.setState({ currentAnswer: category.answer })
+  // }
 
   render () {
     console.log('render')
     const { categories, currentCategory } = this.state
 
     return (
-      <div className='App'>
-        <Header />
+      <div className='App mw8 center pa4'>
         {
           currentCategory
-            ? <CategoryData category={currentCategory} />
-            : (
-              <div>
-                <h3>List of categories</h3>
-                <ul>
-                  {this.state.categories.map(category => (
-                    <li key={category.question}>
-                      <a href='#' onClick={() => this.setQuestion(category)}>{category.category}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
+            ? <QuestionData currentCategory={currentCategory} />
+            : (<CategoryData
+              categories={this.state.categories}
+              currentCategory={this.currentCategory}
+            />)
         }
+
+        {/* {
+          currentCategory
+            ? <QuestionData currentCategory={currentCategory} />
+            : (
+              <CategoryData
+                categories={categories}
+                currentCategory={this.currentCategory}
+              />
+            )
+        } */}
       </div>
+      // <div className='App'>
+      //   <Header />
+      //   {
+      //     currentCategory // ? is an if statement so if << then >>
+      //       ? <CategoryData category={currentCategory} />
+      //       : ( // :  else
+      //         <div>
+      //           <h3>List of categories</h3>
+      //           <ul>
+      //             {this.state.categories.map(category => (
+      //               <li key={category.id}>
+      //                 <a href='#' onClick={(e) => { e.preventDefault(); this.currentCategory(category) }}>{category.name}</a>
+      //               </li>
+      //             ))}
+      //           </ul>
+      //         </div>
+      //       )
+      //   }
+      // </div>
     )
   }
 };
