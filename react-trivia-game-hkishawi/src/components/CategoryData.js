@@ -21,17 +21,19 @@ export default class CategoryData extends React.Component {
 
   render () {
     return (
-      <div className='CategoryData'>
+      <div className='CategoryData align'>
         <h2>Pick a trivia category</h2>
-        <div>
+        <div className="dib">
           {this.props.categories.map(category => (
+            <div>
             <button 
               key={category.id} 
-              className=''
+              className='f6 link dim ph3 pv2 mb2 dib white bg-dark-blue'
               onClick={() => this.props.currentCategory(category)}
             >
               {category.name}
               </button>
+            </div>
           ))}
         </div>
       </div>

@@ -12,3 +12,9 @@
 .navBar {
   text-align: center;
 }
+
+.align {
+ position: fixed;
+  left: 10%;
+  right: 10%;
+}

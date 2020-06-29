@@ -70,7 +70,7 @@ class App extends React.Component {
     const { categories, currentCategory } = this.state
 
     return (
-      <div className='App mw8 center pa4'>
+      <div className='App align dib center'>
         {
           currentCategory
             ? <QuestionData currentCategory={currentCategory} />
