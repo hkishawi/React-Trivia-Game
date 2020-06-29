@@ -1,17 +1,24 @@
 import React from 'react'
+// import './App.css'
+import { Link } from 'react-router-dom'
+
 
 class Header extends React.Component {
   render () {
-    return [
-      <div class="header">
-        <h1 >Welcome to Trivia!</h1>
-        <div>
-        <span><a href='http://localhost:3000/' onClick=""> home | </a></span>
-        <span> trivia | </span>
-        <span> about </span>
-        </div>
-      </div>
-    ]
+    return (
+      <nav>
+        <h1>Trivet</h1>
+        <ul className='nav-links'>
+          <Link to='/trivia'>
+            <span>Home | </span>
+          </Link>
+          
+          <Link to='/about'>
+            <span> About</span>
+          </Link>
+        </ul>
+      </nav>
+    )
   }
 }
 

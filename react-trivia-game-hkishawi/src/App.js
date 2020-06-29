@@ -7,6 +7,7 @@ import axios from 'axios'
 import CategoryData from './components/CategoryData'
 import AnswerData from './components/AnswerData'
 import QuestionData from './components/QuestionData'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Header () {
 //   render () {
@@ -70,7 +71,21 @@ class App extends React.Component {
     const { categories, currentCategory } = this.state
 
     return (
+      
+      
       <div className='App align dib center'>
+        <div>
+         
+        </div>
+      <Router>
+      <div>
+        <Switch>
+          <Route path="/" exact component={Header} />
+          <Route path="/trivia" component={CategoryData} />
+          <Route path="/about" component={Header} />
+        </Switch>
+      </div>
+      </Router>
         {
           currentCategory
             ? <QuestionData currentCategory={currentCategory} />
@@ -79,39 +94,16 @@ class App extends React.Component {
               currentCategory={this.currentCategory}
             />)
         }
-
-        {/* {
-          currentCategory
-            ? <QuestionData currentCategory={currentCategory} />
-            : (
-              <CategoryData
-                categories={categories}
-                currentCategory={this.currentCategory}
-              />
-            )
-        } */}
       </div>
-      // <div className='App'>
-      //   <Header />
-      //   {
-      //     currentCategory // ? is an if statement so if << then >>
-      //       ? <CategoryData category={currentCategory} />
-      //       : ( // :  else
-      //         <div>
-      //           <h3>List of categories</h3>
-      //           <ul>
-      //             {this.state.categories.map(category => (
-      //               <li key={category.id}>
-      //                 <a href='#' onClick={(e) => { e.preventDefault(); this.currentCategory(category) }}>{category.name}</a>
-      //               </li>
-      //             ))}
-      //           </ul>
-      //         </div>
-      //       )
-      //   }
-      // </div>
     )
-  }
+  }  
 };
+
+const About = () => (
+  <div>
+    <h1>About</h1>
+  </div>
+)
+
 
 export default App
