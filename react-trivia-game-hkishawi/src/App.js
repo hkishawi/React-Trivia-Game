@@ -8,6 +8,7 @@ import CategoryData from './components/CategoryData'
 import AnswerData from './components/AnswerData'
 import QuestionData from './components/QuestionData'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import About from './components/About'
 
 // Header () {
 //   render () {
@@ -74,15 +75,17 @@ class App extends React.Component {
       
       
       <div className='App align dib center'>
+        
         <div>
          
         </div>
       <Router>
+      <Header />
       <div>
         <Switch>
           <Route path="/" exact component={Header} />
-          <Route path="/trivia" component={CategoryData} />
-          <Route path="/about" component={Header} />
+          <Route path="/about" component={About} />  
+          {/* not sure how component works.. */}
         </Switch>
       </div>
       </Router>
@@ -99,11 +102,6 @@ class App extends React.Component {
   }  
 };
 
-const About = () => (
-  <div>
-    <h1>About</h1>
-  </div>
-)
 
 
 export default App

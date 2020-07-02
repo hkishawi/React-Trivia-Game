@@ -7,7 +7,7 @@ class Header extends React.Component {
   render () {
     return (
       <nav>
-        <h1>Trivet</h1>
+        <h1>Trivia Game</h1>
         <ul className='nav-links'>
           <Link to='/trivia'>
             <span>Home | </span>

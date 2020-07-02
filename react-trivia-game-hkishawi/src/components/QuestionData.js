@@ -47,9 +47,9 @@ export default class QuestionData extends React.Component {
     const currentQuestion = questions[currentQIdx]
     const correct_answer = currentQuestion.correct_answer
     if (answer == correct_answer) {
-      return this.handleCorrectAnswer
+      return this.handleCorrectAnswer()
     } else {
-      return this.handleIncorrectAnswer
+      return this.handleIncorrectAnswer()
     }
   }
 
@@ -64,13 +64,6 @@ export default class QuestionData extends React.Component {
     if (currentQuestion) {
       answers = currentQuestion.incorrect_answers.concat([currentQuestion.correct_answer]) // this is combining the array of answers
     }
-
-    // if (correctAnswer) {
-    //     return this.handleCorrectAnswer
-    // } else {
-    //     return this.handleIncorrectAnswer
-    // }
-
     return (
       <div className='QuestionData align'>
         <h1>{currentCategory.name} Questions</h1>
@@ -79,19 +72,16 @@ export default class QuestionData extends React.Component {
           <div>
             <div className='child inline ba'>
               <h2 className=''>{htmlEncoder.decode(currentQuestion.question)}</h2>
-              </div>
+            </div>
 
             <div className=' '>
-              {/* {currentQuestion.incorrect_answers.map((answer, idx) =>
-                <button className='' onClick={this.handleIncorrectAnswer}><p key={idx}>{answer}</p></button>)}
-                <button className='' onClick={this.handleCorrectAnswer}><p>{currentQuestion.correct_answer}</p></button> */}
               {answers.map((answer, idx) =>
                 <p key={idx}>
                   <button className='f6 link dim ba ph3 pv2 mb2 dib purple' onClick={this.scoreKeep}>
                     {answer}
                   </button>
                 </p>)}
-              </div>
+            </div>
 
           </div>
 
